@@ -1,26 +1,9 @@
 import requests
 import psycopg2
-import urllib3
-import ssl
 
-# Configuración de seguridad (si no no permite acceder a la API)
 
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-ssl._create_default_https_context = ssl._create_unverified_context
 
-# Configuración de la base de datos
-
-DB_CONFIG = {
-    "host": "localhost",
-    "port": 5432,
-    "database": "postgres",
-    "user": "postgres",
-    "password": "IK008626"
-}
-
-# Función para extraer y cargar losd atos en la base de datos local
-
-def cargar_datos(fecha_inicio, fecha_fin):
+def cargar_datos(fecha_inicio, fecha_fin, DB_CONFIG):
     conn = None
     try:
         # URL de la API con rango de fechas
@@ -33,10 +16,11 @@ def cargar_datos(fecha_inicio, fecha_fin):
             datos_completos = respuesta.json()
             cambios = datos_completos.get("rates", {})
             
-            conn = psycopg2.connect(**DB_CONFIG)
+            conn = psycopg2.connect(DB_CONFIG)
             cur = conn.cursor()
 
             # Lista de todas las divisas disponibles
+            
             lista_divisas = sorted(cambios[list(cambios.keys())[0]].keys())
 
             # Creamos la tabla si no existe
@@ -70,7 +54,3 @@ def cargar_datos(fecha_inicio, fecha_fin):
     finally:
         if conn:
             conn.close()
-
-
-if __name__ == "__main__":
-    cargar_datos("2024-01-01", "2024-02-28")

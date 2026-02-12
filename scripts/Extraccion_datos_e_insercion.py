@@ -37,6 +37,7 @@ def cargar_datos(fecha_inicio, fecha_fin):
             cur = conn.cursor()
 
             # Lista de todas las divisas disponibles
+            
             lista_divisas = sorted(cambios[list(cambios.keys())[0]].keys())
 
             # Creamos la tabla si no existe
@@ -70,7 +71,3 @@ def cargar_datos(fecha_inicio, fecha_fin):
     finally:
         if conn:
             conn.close()
-
-
-if __name__ == "__main__":
-    cargar_datos("2024-01-01", "2024-02-28")

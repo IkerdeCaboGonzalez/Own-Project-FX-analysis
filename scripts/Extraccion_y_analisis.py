@@ -43,7 +43,7 @@ fechas, divisas = pd.DataFrame(fechas), pd.DataFrame(divisas)
 
 print(filas_df.head())
 
-plt.plot(fechas, divisas.iloc[:,0:5])
+plt.plot(fechas, divisas.iloc[:,0:3])
 plt.xlabel("Fecha")
 plt.ylabel("Valor de las divisas")
 plt.title("Evolución de las divisas a lo largo del tiempo")
