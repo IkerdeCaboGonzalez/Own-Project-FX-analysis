@@ -10,14 +10,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 # Configuración de la base de datos
 
-DB_CONFIG = {
-    "host": "localhost",
-    "port": 5432,
-    "database": "postgres",
-    "user": "postgres",
-    "password": "IK008626"
-}
 
-cargar_datos("2020-01-01", "2025-12-31", DB_CONFIG)
+cargar_datos("2020-01-01", "2025-12-31")
 
 
