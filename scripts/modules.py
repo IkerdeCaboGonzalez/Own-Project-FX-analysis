@@ -1,15 +1,10 @@
 import requests
 import psycopg2
+import pandas as pd
 
-DB_CONFIG = {
-    "host": "localhost",
-    "port": 5432,
-    "database": "postgres",
-    "user": "postgres",
-    "password": "IK008626"
-}
+# Función para extraer losd atos desde la API y cargarlos en la base de datos
 
-def cargar_datos(fecha_inicio, fecha_fin):
+def importar_datos(fecha_inicio, fecha_fin, DB_CONFIG):
     conn = None
     try:
         # URL de la API con rango de fechas
@@ -22,7 +17,7 @@ def cargar_datos(fecha_inicio, fecha_fin):
             datos_completos = respuesta.json()
             cambios = datos_completos.get("rates", {})
             
-            conn = psycopg2.connect(DB_CONFIG)
+            conn = psycopg2.connect(**DB_CONFIG)
             cur = conn.cursor()
 
             # Lista de todas las divisas disponibles
@@ -60,3 +55,36 @@ def cargar_datos(fecha_inicio, fecha_fin):
     finally:
         if conn:
             conn.close()
+
+
+# Función para cargar los datos desde la base de datos
+
+def cargar_datos(DB_CONFIG):
+    conn = None
+    try:
+        # Creamos la conexión y el cursor
+        conn = psycopg2.connect(**DB_CONFIG)
+        cur = conn.cursor()
+
+        # Traemos todos los datos de la tabla
+        cur.execute("SELECT * FROM divisas;")
+
+        # Extraemos todas las filas y los nombres de las columnas para crear un DataFrame
+        filas = cur.fetchall()
+        nombres_columnas = [desc[0] for desc in cur.description]
+        df = pd.DataFrame(filas, columns=nombres_columnas)
+
+    except Exception as e:
+        print("Error al cargar datos:", e)
+    
+    finally:
+        if conn:
+            conn.close()
+    return df
+
+def metricas_volatilidad(df):
+    pass
+
+
+
+
