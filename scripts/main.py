@@ -1,7 +1,7 @@
 import urllib3
 import ssl
 
-from modules import cargar_datos
+from modules import importar_datos, cargar_datos
 
 # Configuración de seguridad (si no no permite acceder a la API)
 
@@ -19,6 +19,10 @@ DB_CONFIG = {
 }
 
 
-cargar_datos("2000-01-01", "2025-12-31", DB_CONFIG)
+importar_datos("2000-01-01", "2025-12-31", DB_CONFIG)
+
+data = cargar_datos(DB_CONFIG)
+
+print(data)
 
 
