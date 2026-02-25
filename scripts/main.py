@@ -1,7 +1,7 @@
 import urllib3
 import ssl
 
-from modules import importar_datos, cargar_datos
+from modules import importar_datos, cargar_datos, metricas_volatilidad
 
 # Configuración de seguridad (si no no permite acceder a la API)
 
@@ -23,6 +23,20 @@ importar_datos("2000-01-01", "2025-12-31", DB_CONFIG)
 
 data = cargar_datos(DB_CONFIG)
 
-print(data)
+print(data.head())
 
 
+desviacion_estandar, desviacion_estandar_normalizada, rendimiento, returns = metricas_volatilidad(data)
+
+
+print("Desviación Estándar:")
+print(desviacion_estandar)
+
+print("Desviación Estándar Normalizada:")
+print(desviacion_estandar_normalizada)
+
+print("Rendimiento:")
+print(rendimiento)
+
+print("Returns:")
+print(returns)
