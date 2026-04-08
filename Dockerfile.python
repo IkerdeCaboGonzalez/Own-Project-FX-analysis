@@ -1,0 +1,16 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Instalamos dependencias del sistema necesarias para psycopg2
+RUN apt-get update && apt-get install -y libpq-dev gcc && rm -rf /var/lib/apt/lists/*
+
+# Copiamos e instalamos las dependencias de Python
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copiamos el resto del código (main.py, modules.py, etc.)
+COPY . .
+
+# Comando para ejecutar tu ingesta de datos
+CMD ["python", "scripts/main.py"]

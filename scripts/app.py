@@ -59,7 +59,7 @@ if len(rango_fechas) == 2:
         # 4. Visualización de Tablas
         st.subheader(f"Resultados del periodo: {inicio} a {fin}")
         
-        col1, col2 = st.columns(2)
+        col1, col2, clo3 = st.columns(3)
 
         with col1:
             st.markdown(" Desviación Estándar")
@@ -70,7 +70,11 @@ if len(rango_fechas) == 2:
             st.markdown(" Volatilidad Relativa (Normalizada)")
             st.info("Coeficiente de variación: ideal para comparar divisas con diferentes valores nominales.")
             st.dataframe(std_norm.rename("Volatilidad %").sort_values(ascending=False), use_container_width=True)
-
+        with clo3:
+            st.markdown(" Rendimiento Total")
+            st.info("Cambio porcentual total entre el inicio y el fin del periodo.")
+            st.dataframe(rendimiento.rename("Rendimiento %").sort_values(ascending=False), use_container_width=True)
+            
         # 5. Gráfico de apoyo
         st.divider()
         st.subheader("Evolución Temporal")

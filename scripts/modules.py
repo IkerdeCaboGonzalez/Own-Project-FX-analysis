@@ -94,9 +94,9 @@ def metricas_volatilidad(df):
     desviacion_estandar_normalizada = divisas.std()/divisas.mean()
     rendimiento = (divisas.iloc[0]-divisas.iloc[-1])/divisas.iloc[-1] 
     returns = np.log(divisas / divisas.shift(1)).dropna()
-    #var_diario = returns.quantile(1-0.95)
+    # var_diario = returns.quantile(1-0.95)
 
-    return desviacion_estandar, desviacion_estandar_normalizada, rendimiento, returns # , var_diario
+    return desviacion_estandar, desviacion_estandar_normalizada, rendimiento, returns #  , var_diario
 
 
 
