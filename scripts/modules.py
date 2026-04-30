@@ -95,7 +95,7 @@ def metricas_volatilidad(df):
     rendimiento = (divisas.iloc[0]-divisas.iloc[-1])/divisas.iloc[-1] 
     matriz_correlacion = divisas.corr()
 
-    return desviacion_estandar, desviacion_estandar_normalizada, rendimiento, returns, matriz_correlacion #  , var_diario
+    return desviacion_estandar, desviacion_estandar_normalizada, rendimiento, matriz_correlacion #  , var_diario
 
 
 

@@ -69,7 +69,9 @@ if len(rango_fechas) == 2:
         with col3:
             st.dataframe(rendimiento.rename("Rendimiento Total %").sort_values(ascending=False), use_container_width=True)
         with col4:
-            st.dataframe(matriz_correlacion.rename("Matriz de Correlación"), use_container_width=True)
+                st.subheader("Matriz de Correlación")
+                # Al quitar el .style.background_gradient(), ya no necesitas Matplotlib
+                st.dataframe(matriz_correlacion, use_container_width=True)
 
         # 5. Gráfico de apoyo
         st.divider()
