@@ -28,7 +28,7 @@ data = cargar_datos(DB_CONFIG)
 print(data.head())
 
 
-desviacion_estandar, desviacion_estandar_normalizada, rendimiento, returns = metricas_volatilidad(data)
+desviacion_estandar, desviacion_estandar_normalizada, rendimiento, matriz_correlacion = metricas_volatilidad(data)
 
 
 print("Desviación Estándar:")
@@ -40,5 +40,5 @@ print(desviacion_estandar_normalizada)
 print("Rendimiento:")
 print(rendimiento)
 
-print("Returns:")
-print(returns)
+print("Matriz de Correlación:")
+print(matriz_correlacion)

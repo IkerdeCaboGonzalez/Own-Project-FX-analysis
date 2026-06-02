@@ -60,7 +60,7 @@ if len(rango_fechas) == 2:
         # 4. Visualización de Tablas
         st.subheader(f"Resultados del periodo: {inicio} a {fin}")
         
-        col1, col2, col3, col4 = st.columns(4)
+        col1, col2, col3 = st.columns(3)
 
         with col1:
             st.dataframe(std.rename("Volatilidad").sort_values(ascending=False), use_container_width=True)
@@ -68,10 +68,7 @@ if len(rango_fechas) == 2:
             st.dataframe(std_norm.rename("Volatilidad Relativa").sort_values(ascending=False), use_container_width=True)
         with col3:
             st.dataframe(rendimiento.rename("Rendimiento Total %").sort_values(ascending=False), use_container_width=True)
-        with col4:
-                st.subheader("Matriz de Correlación")
-                # Al quitar el .style.background_gradient(), ya no necesitas Matplotlib
-                st.dataframe(matriz_correlacion, use_container_width=True)
+
 
         # 5. Gráfico de apoyo
         st.divider()

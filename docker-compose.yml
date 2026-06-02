@@ -1,7 +1,11 @@
 services:
   db:
-    build: .
+    image: postgres:latest  # Usa la imagen oficial directamente
     container_name: postgres_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=IK008626
+      - POSTGRES_DB=postgres
     ports:
       - "5432:5432"
     healthcheck:
@@ -20,3 +24,10 @@ services:
         condition: service_healthy
     environment:
       - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=IK008626
+      - DB_NAME=postgres
+    ports:
+      - "8501:8501"
+
+# pg admin
